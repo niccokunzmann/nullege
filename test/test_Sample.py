@@ -1,4 +1,7 @@
-from test import *
+try:
+    from nullege.test.test import *
+except ImportError:
+    from test import *
 
 from nullege.sample import Sample
 
@@ -57,7 +60,7 @@ class SampleTest(unittest.TestCase):
     @property
     def sample4(self):
         sample = self.sample1
-        sample._urlopen = MockUrlRequest(sample1['nullege_file'], b'S4', 'utf8')
+        sample._urlopen = MockUrlRequest(sample1['nullege_file'], b'\xe1\x88\xb4', 'utf8')
         return sample
 
     def test_file(self):
@@ -82,10 +85,10 @@ class SampleTest(unittest.TestCase):
         self.assertEqual(self.sample1.raw, sample1)
 
     def test_source3(self):
-        self.assertEqual(self.sample3.source, 'abcd')
+        self.assertEqual(self.sample3.source, b'abcd')
 
     def test_source4(self):
-        self.assertEqual(self.sample4.source, u'\1234')
+        self.assertEqual(self.sample4.source, b'\xe1\x88\xb4'.decode('utf8'))
 
 if __name__ == '__main__':
     unittest.main(exit = False)
