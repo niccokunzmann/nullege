@@ -1,0 +1,5 @@
+python:
+  - "2.7"
+  - "3.2"
+
+script: ./script/ci/run_build.sh
