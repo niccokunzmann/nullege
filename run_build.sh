@@ -4,6 +4,12 @@ echo "$( cd "$( dirname "${0}" )" && pwd )"
 
 cd "$( cd "$( dirname "${0}" )" && pwd )"
 
+echo 
+echo Python version: 
+/usr/bin/env python --version
+
 /usr/bin/env python2 test_all.py
 /usr/bin/env python3 test_all.py
+
+ls /usr/bin
 
