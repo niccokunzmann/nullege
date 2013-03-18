@@ -1,4 +1,4 @@
-nullege
+nullege [![Build Status](https://travis-ci.org/niccokunzmann/nullege.png?branch=master)](https://travis-ci.org/niccokunzmann/nullege)
 =======
 
 nullege is a python library to use the nullege API to search for usage of python objects in open source code.
