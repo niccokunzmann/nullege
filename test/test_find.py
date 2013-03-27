@@ -3,7 +3,7 @@ try:
 except ImportError:
     from test import *
 
-from nullege.find import find, Samples
+from nullege.find import Samples
 import nullege.find
 
 
