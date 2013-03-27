@@ -45,11 +45,11 @@ class Samples(object):
         """Create an iterable search result for the string"""
         self._searchString = string
         self._samples = {} # (start index, end index) -> [listofsamples]
-        self._length = None
+        self._length = 0
 
     def __len__(self):
-        """return the count of samples, None if unknown"""
-        return self._length
+        """the count of loaded samples"""
+        return sum(map(len, self._samples.values()))
 
     def _get_local_sample(self, index, default = None):
         """get the sample at index but do not load from the internet
