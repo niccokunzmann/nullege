@@ -57,11 +57,17 @@ class SampleTest(unittest.TestCase):
         sample._urlopen = MockUrlRequest(sample1['nullege_file'], b'\xe1\x88\xb4', 'utf8')
         return sample
 
+    @property
+    def sample5(self):
+        sample = self.sample1
+        sample._urlopen = MockUrlRequest(sample1['nullege_file'], '\n'.join(map(str, range(1, 100))), None)
+        return sample
+
     def test_file(self):
         self.assertEqual(self.sample1.file, sample1['file'])
 
     def test_lines(self):
-        self.assertEqual(self.sample1.lines, [32, 45])
+        self.assertEqual(self.sample1.line_numbers, [32, 45])
 
     def test_nullege_file_url(self):
         self.assertEqual(self.sample1.nullege_file_url, sample1['nullege_file'])
@@ -83,6 +89,16 @@ class SampleTest(unittest.TestCase):
 
     def test_source4(self):
         self.assertEqual(self.sample4.source, b'\xe1\x88\xb4'.decode('utf8'))
+
+    def test_lines_around(self):
+        self.assertEqual(self.sample5.lines_around(4, 5), ['2', '3', '4', '5', '6'])
+
+    def test_sample_lines(self):
+        self.assertEqual(self.sample5.line_numbers, [32, 45])
+        self.assertEqual(self.sample5.sample_lines(), [['30', '31', '32', '33', '34'], ['43', '44', '45', '46', '47']])
+
+    def test_sample_lines_join(self):
+        self.assertEqual(self.sample5.sample_lines(14), [list(map(str, range(26, 53)))])
 
 if __name__ == '__main__':
     unittest.main(exit = False)

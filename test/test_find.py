@@ -32,7 +32,6 @@ class SamplesTest(unittest.TestCase):
 
     def test_unknown_length_is_None(self):
         self.assertEqual(len(self.samples), 0)
-
         
 if __name__ == '__main__':
     unittest.main(exit = False)

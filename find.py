@@ -114,6 +114,32 @@ class Samples(object):
             index += 1
 
 
-def find(string):
+def find_samples(obj):
+    """the object can be a string or an object"""
+    if isinstance(obj, str):
+        string = obj
+    else:
+        if isinstance(obj.__class__, type) \
+            or hasattr(obj, '__module__') and hasattr(obj, '__name__') or \
+            hasattr(obj, '__qualname__'):
+            cls = obj
+        else:
+            cls = obj.__class__
+        string = get_qual_name(cls)
     return Samples(string)
+    
+
+def get_qual_name(obj):
+    """return the qualified name of the object for the search with nullege"""
+    if hasattr(obj, '__qualname__'):
+        return obj.__qualname__
+    if hasattr(obj, '__name__') and hasattr(obj, '__module__'):
+        return obj.__module__ + '.' + obj.__name__
+    raise AttributeError('no attributes found the make a usable string ' \
+                         'out oj the object')
+    
+def sample(obj, count = 5):
+    """print samples of the use of this object"""
+
+    
     

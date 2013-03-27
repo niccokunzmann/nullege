@@ -40,7 +40,7 @@ class Sample(object):
         return self._get('file')
 
     @property
-    def lines(self):
+    def line_numbers(self):
         """the lines where the object occurs as integers"""
         return list(map(int, self.raw_lines))
 
@@ -90,3 +90,32 @@ class Sample(object):
         if charset:
             source = source.decode(charset)
         return source
+
+    def _lines_around(self, line_number, number_of_lines_in_sample):
+        """return a number_of_lines around the line, start and end"""
+        plus = (number_of_lines_in_sample) // 2
+        minus = number_of_lines_in_sample - plus
+        end = line_number + plus
+        start = line_number - minus
+        return self.source_lines[start: end], start, end
+
+    def lines_around(self, line_number, number_of_lines = 5):
+        """return a number_of_lines around the line"""
+        return self._lines_around(line_number, number_of_lines)[0]
+
+    def sample_lines(self, number_of_lines_in_sample = 5):
+        """a list of lines from the source where the name occurs"""
+        source_lines = self.source_lines
+        sample_lines = [self._lines_around(line_number, number_of_lines_in_sample)\
+                        for line_number in self.line_numbers]
+        result = [sample_lines[0][0]]
+        for s1, s2 in zip(sample_lines, sample_lines[1:]):
+            if s1[2] >= s2[1]:
+                result[-1] += s2[0][s1[2] - s2[1]:]
+            else:
+                result.append(s2[0])
+        return result
+        
+            
+
+
