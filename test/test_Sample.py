@@ -5,12 +5,6 @@ except ImportError:
 
 from nullege.sample import Sample
 
-sample1 =   {'file': 'releases/0.9.6/topographica/examples/perrinet_retina_pynest.py',
-             'lines': ['32', '45'],
-             'nullege_file': 'http://nullege.com/rawsrc/src%40t%40o%40topographica-HEAD%40releases%400.9.6%40topographica%40examples%40perrinet_retina_pynest.py',
-             'project': 'topographica',
-             'repository': 'https://topographica.svn.sourceforge.net/svnroot/topographica'}
-
 class MockUrlRequest(object):
     def __init__(self, url, source, charset):
         self._url = url

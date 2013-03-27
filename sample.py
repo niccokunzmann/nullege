@@ -9,9 +9,10 @@ class SourceNotFound(EOFError):
     """The source of the sample was not found"""
 
 class Sample(object):
-    def __init__(self, name, dict):
+    def __init__(self, name, dict, index_in_request = None):
         self._name = name
         self._dict = dict
+        self._index = index_in_request
 
     def _get(self, name):
         """get the value behind name"""
@@ -21,6 +22,17 @@ class Sample(object):
     def raw(self):
         """the dicionairy returned by the request"""
         return self._dict
+
+    @property
+    def index(self):
+        """the index in the request
+        None if this sample is not part of a request"""
+        return self._index
+
+    @property
+    def name(self):
+        """the name that was searched for"""
+        return self._name
 
     @property
     def file(self):
