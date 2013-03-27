@@ -1,3 +1,34 @@
+""" Module for finding samples
+
+use sample() instead of help() to get usage samples for the given object
+
+    >>> samples(bytearray)
+    protocyt
+
+        def test_serialize():
+            tree.serialize(bytearray())
+
+        def test_deserialize(ba):
+
+
+        ba = bytearray()
+        tree.serialize(ba)
+        data = pickle.dumps(tree, 2)
+
+        def test_serialize():
+            ba = bytearray()
+            tree.serialize(ba)
+            return len(ba)
+
+find_samples returns a Samples listing.
+
+    >>> find_samples(bytearray)
+    <__main__.Samples object at 0x03BAB030>
+
+#TODO: add Samples.fetch to make it faster
+
+"""
+
 import json
 import sample
 
@@ -137,9 +168,29 @@ def get_qual_name(obj):
         return obj.__module__ + '.' + obj.__name__
     raise AttributeError('no attributes found the make a usable string ' \
                          'out oj the object')
+
+def change_line_identitation(lines, spaces = 4):
+    """change the minimum identation of the given lines to the given amount of whitespaces"""
+    min_ident = min([len(line) - len(line.lstrip()) for line in lines if \
+                     line.lstrip() and line.lstrip()[0] != "#"])
+    if min_ident > spaces:
+        return [line[min_ident - spaces:] for line in lines]
+    return [(spaces - min_ident) * ' ' + line for line in lines]
+        
     
 def sample(obj, count = 5):
-    """print samples of the use of this object"""
+    """print samples where the object is used"""
+    for i, sample in enumerate(find_samples(obj)):
+        if i >= count: break
+        if i != 0:
+            print()
+        print(sample.project)
+        for i, lines in enumerate(sample.sample_lines(5)):
+            print('\n'.join(change_line_identitation(lines)))
+        
 
-    
+__all__ = ['sample', 'Samples', 'find_samples', 'nullege_url', 'nullege_json']
+
+if __name__ == '__main__':
+    sample('bytearray')
     

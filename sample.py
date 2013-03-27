@@ -89,6 +89,8 @@ class Sample(object):
         charset = request.info().get_charset()
         if charset:
             source = source.decode(charset)
+        elif hasattr(source, 'decode'):
+            source = source.decode('utf8')
         return source
 
     def _lines_around(self, line_number, number_of_lines_in_sample):
