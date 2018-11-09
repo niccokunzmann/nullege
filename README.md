@@ -1,14 +1,14 @@
 nullege [![Build Status](https://travis-ci.org/niccokunzmann/nullege.png?branch=master)](https://travis-ci.org/niccokunzmann/nullege)
 =======
 
-nullege is a python library to use the nullege API to search for usage of python objects in open source code.
+nullege is a python library that utilizes the nullege API to search for usage of python objects in open source code.
 
 See http://nullege.com.
 
 Install
 -------
 you can download the latest version here https://github.com/niccokunzmann/nullege/archive/master.zip
-an extract it into your site-packages.
+and extract it into your site-packages.
 
 Or do a 
 
@@ -25,10 +25,10 @@ You should be able to do
 > 
 > find.samples(bytearray)
 
-and it prints out something.
+and it should print something out.
 
 Please contribute
 -----------------
 
-I do not knw any pleople yet who use it.
+I do not know anyone who uses this.
 Get in touch, fork or tell me use-cases!
